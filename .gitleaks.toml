@@ -1,0 +1,13 @@
+# gitleaks config for web-research-cascade
+# Extends the default ruleset and allowlists documentation placeholders,
+# so CI stays clean while still catching real secrets.
+title = "web-research-cascade"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "The documented placeholder key, nothing else"
+regexes = [
+  '''fc-your-key-here''',
+]
