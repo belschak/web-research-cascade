@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 340" width="820" height="340" role="img" aria-label="Terminal demo: a fetch returns 403 Forbidden, the cascade escalates the same URL through Jina Reader and reads the actual page">
+  <!-- 24s loop. Every line animates with the same dur so the loop stays in sync. -->
+  <defs>
+    <style>
+      text {
+        font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+        font-size: 15px;
+      }
+      .bar  { fill: #8b93a7; font-size: 12.5px; letter-spacing: 0.4px; }
+      .user { fill: #e8e6df; }
+      .dim  { fill: #5c6370; }
+      .lbl  { fill: #9aa3b5; }
+      .err  { fill: #ff6b5e; }
+      .run  { fill: #e5c07b; }
+      .ok   { fill: #98c379; }
+      .tag  { fill: #e8e6df; }
+    </style>
+  </defs>
+
+  <!-- window -->
+  <rect x="1" y="1" width="818" height="338" rx="10" fill="#0f1115" stroke="#2a2e3a" stroke-width="1.5"/>
+  <path d="M1 35 h818" stroke="#2a2e3a" stroke-width="1"/>
+  <text x="410" y="23" text-anchor="middle" class="bar">web-research-cascade demo</text>
+
+  <g>
+    <!-- group fade-out at loop end -->
+    <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+             values="1;1;0;0" keyTimes="0;0.9375;0.9792;1"/>
+
+    <!-- L1: user asks for a primary source -->
+    <text x="28" y="78" class="user">you&gt; read https://primary-source.example/report and summarize it
+      <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+               values="0;0;1;1" keyTimes="0;0.0417;0.0583;1"/>
+    </text>
+
+    <!-- L2: stage 1 blocks -->
+    <text y="112">
+      <tspan x="28" class="lbl">Stage 1</tspan>
+      <tspan x="120" class="lbl">WebFetch</tspan>
+      <tspan x="300" class="dim">-&gt;</tspan>
+      <tspan x="345" class="err">HTTP 403 Forbidden</tspan>
+      <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+               values="0;0;1;1" keyTimes="0;0.125;0.1417;1"/>
+    </text>
+
+    <!-- L3: the thesis, as a quiet comment -->
+    <text x="120" y="138" class="dim">(most agents now quietly summarize some blog instead)
+      <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+               values="0;0;1;1" keyTimes="0;0.2083;0.225;1"/>
+    </text>
+
+    <!-- L4: stage 2 running (replaced by L5) -->
+    <text y="172">
+      <tspan x="28" class="lbl">Stage 2</tspan>
+      <tspan x="120" class="lbl">Jina Reader</tspan>
+      <tspan x="300" class="dim">-&gt;</tspan>
+      <tspan x="345" class="run">fetching r.jina.ai/https://primary-source.example/report</tspan>
+      <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+               values="0;0;1;1;0;0" keyTimes="0;0.3125;0.3292;0.4208;0.4375;1"/>
+    </text>
+
+    <!-- L5: stage 2 succeeds (same line position) -->
+    <text y="172">
+      <tspan x="28" class="lbl">Stage 2</tspan>
+      <tspan x="120" class="lbl">Jina Reader</tspan>
+      <tspan x="300" class="dim">-&gt;</tspan>
+      <tspan x="345" class="ok">200 OK, clean Markdown  [done]</tspan>
+      <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+               values="0;0;1;1" keyTimes="0;0.4375;0.4542;1"/>
+    </text>
+
+    <!-- L6: result -->
+    <text y="206">
+      <tspan x="28" class="ok">[result]</tspan>
+      <tspan x="120" class="user">summarized the actual report, 0 credits spent</tspan>
+      <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+               values="0;0;1;1" keyTimes="0;0.5208;0.5375;1"/>
+    </text>
+
+    <!-- L7: tagline -->
+    <text x="28" y="248" class="tag">escalate the fetch. never swap the source.
+      <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+               values="0;0;1;1" keyTimes="0;0.625;0.6458;1"/>
+    </text>
+
+    <!-- L8: fresh prompt with blinking cursor -->
+    <g>
+      <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
+               values="0;0;1;1" keyTimes="0;0.7083;0.725;1"/>
+      <text x="28" y="288" class="user">you&gt;</text>
+      <rect x="75" y="275" width="9" height="17" fill="#e8e6df">
+        <animate attributeName="opacity" dur="1.1s" repeatCount="indefinite"
+                 values="1;1;0;0" keyTimes="0;0.5;0.51;1"/>
+      </rect>
+    </g>
+  </g>
+</svg>
