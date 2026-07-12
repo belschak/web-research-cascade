@@ -2,6 +2,8 @@
 
 **A Claude Code / agent skill that stops your agent from silently reading the wrong source.**
 
+![Animated terminal demo: a fetch returns 403, the cascade escalates the same URL through Jina Reader, and the real page comes through](assets/demo.svg)
+
 The skill enforces two habits, in that order. First, before fetching anything, the agent decides which sources would genuinely best answer the question: the primary document, the official docs, the actual announcement, not whichever page is easiest to fetch. Second, once a source is chosen, the agent actually gets it. Today, when an agent hits a `403`, it usually does not tell you; it quietly summarizes a secondary blog that *quotes* the source, and your analysis ends up built on second-hand material you never chose. This skill turns that silent fallback into a visible escalation: the *same* URL is worked through stronger fetch methods until the real page comes through.
 
 ```text
@@ -68,11 +70,15 @@ Any fetch that returns `403 / 401 / 429`, "unable to fetch", an empty or truncat
 
 ## Why Firecrawl is a script, not an MCP
 
-The Firecrawl MCP injects an instruction that makes `firecrawl_search` the primary search tool, which overrides this cascade; Claude Code currently offers no configuration to suppress what an MCP server injects (a request to make MCP injection suppressible was closed *not planned*, see [claude-code#43690](https://github.com/anthropics/claude-code/issues/43690)). The script has no such instruction, costs no standing context, and stays scrape-only (1 credit).
+The Firecrawl MCP server injects an instruction that makes `firecrawl_search` the primary search tool, which overrides this cascade (quoted verbatim in [`src/index.ts`](https://github.com/firecrawl/firecrawl-mcp-server/blob/main/src/index.ts)). Claude Code currently offers no configuration to suppress what an MCP server injects; related requests were closed *not planned*: [claude-code#43690](https://github.com/anthropics/claude-code/issues/43690) (suppressing built-in MCP tool injection) and [claude-code#30545](https://github.com/anthropics/claude-code/issues/30545) (MCP server instructions overriding CLAUDE.md rules). The script has no such instruction, costs no standing context, and stays scrape-only (1 credit).
 
 ## Contributing
 
-Issues and PRs welcome. Good first contributions: a new "source with its own route" (like the Reddit/X/Zendesk shortcuts), a fix for a stage that broke because a provider changed, or a tested improvement to `x_tweet.py`. Open an issue describing the blocked source and how you got through.
+Issues and PRs welcome. Good first contributions: a new "source with its own route" (like the Reddit/X/Zendesk shortcuts), a fix for a stage that broke because a provider changed, or a tested improvement to `x_tweet.py`. Open an issue describing the blocked source and how you got through. Details in [CONTRIBUTING.md](CONTRIBUTING.md); issues labeled `good first issue` are scoped to under an hour.
+
+## Related skills
+
+- **repo-audit**: audit a third-party repo, package, or skill for security red flags before you install it. Next repo in this series; this line becomes a link when it ships.
 
 ## Disclaimer
 
