@@ -54,7 +54,7 @@
       <tspan x="28" class="lbl">Stage 2</tspan>
       <tspan x="120" class="lbl">Jina Reader</tspan>
       <tspan x="300" class="dim">-&gt;</tspan>
-      <tspan x="345" class="run">fetching r.jina.ai/https://primary-source.example/report</tspan>
+      <tspan x="345" class="run">fetching r.jina.ai/https://&#8230;/report</tspan>
       <animate attributeName="opacity" dur="24s" repeatCount="indefinite"
                values="0;0;1;1;0;0" keyTimes="0;0.3125;0.3292;0.4208;0.4375;1"/>
     </text>

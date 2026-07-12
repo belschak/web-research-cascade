@@ -20,7 +20,7 @@ There is no build and there are no dependencies.
 ```bash
 git clone https://github.com/belschak/web-research-cascade.git
 cd web-research-cascade
-python x_tweet.py --help          # scripts run on stock Python 3.9+
+python x_tweet.py "https://x.com/jack/status/20"   # smoke test; stock Python 3.9+
 ```
 
 To test the skill itself, copy (or clone) the folder into your agent's skills directory (`~/.claude/skills/` for Claude Code) and run a fetch against a page that 403s.
