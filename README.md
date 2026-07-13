@@ -78,7 +78,7 @@ Issues and PRs welcome. Good first contributions: a new "source with its own rou
 
 ## Related skills
 
-- **repo-audit**: audit a third-party repo, package, or skill for security red flags before you install it. Next repo in this series; this line becomes a link when it ships.
+- **[repo-audit](https://github.com/belschak/repo-audit)**: audit a third-party repo, package, or skill for security red flags before you install it.
 
 ## Disclaimer
 
