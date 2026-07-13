@@ -13,11 +13,12 @@ STDLIB ONLY (urllib/json/sys/os) -- no pip installs. Cross-platform.
 Setup: copy .env.example to .env and paste your key (see .env.example).
 
 Usage:
-    python firecrawl_fetch.py "https://example.com"
+    python firecrawl_fetch.py [--timeout SECONDS] "https://example.com"
 """
 from __future__ import annotations
 
 import json
+import argparse
 import os
 import sys
 import urllib.error
@@ -65,7 +66,7 @@ def read_api_key() -> str:
     raise SystemExit("FIRECRAWL_API_KEY missing in .env")
 
 
-def scrape(url: str, api_key: str) -> str:
+def scrape(url: str, api_key: str, timeout: int = TIMEOUT) -> str:
     body = json.dumps({"url": url, "formats": [{"type": "markdown"}]}).encode("utf-8")
     req = urllib.request.Request(
         API_URL,
@@ -78,7 +79,7 @@ def scrape(url: str, api_key: str) -> str:
     )
     try:
         # nosec B310: request goes to the hardcoded https API_URL constant only.
-        with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
             payload = json.loads(r.read().decode("utf-8", "replace"))
     except urllib.error.HTTPError as e:
         code = e.code
@@ -112,14 +113,20 @@ def scrape(url: str, api_key: str) -> str:
 
 
 def main() -> None:
-    if len(sys.argv) < 2:
-        raise SystemExit('Usage: python firecrawl_fetch.py "<url>"')
-    url = sys.argv[1].strip()
+    parser = argparse.ArgumentParser(description="Scrape one URL to Markdown via Firecrawl.")
+    parser.add_argument("--timeout", type=int, default=TIMEOUT,
+                        help=f"request timeout in seconds (default: {TIMEOUT})")
+    parser.add_argument("url", help="URL to scrape")
+    args = parser.parse_args()
+    if args.timeout <= 0:
+        parser.error("--timeout must be a positive number of seconds")
+
+    url = args.url.strip()
     if not url or not url.lower().startswith(("http://", "https://")):
         raise SystemExit(f"Invalid URL (must start with http:// or https://): {url!r}")
 
     api_key = read_api_key()
-    print(scrape(url, api_key))
+    print(scrape(url, api_key, timeout=args.timeout))
 
 
 if __name__ == "__main__":
