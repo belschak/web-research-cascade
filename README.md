@@ -70,7 +70,7 @@ Any fetch that returns `403 / 401 / 429`, "unable to fetch", an empty or truncat
 
 ## Why Firecrawl is a script, not an MCP
 
-The Firecrawl MCP server injects an instruction that makes `firecrawl_search` the primary search tool, which overrides this cascade (quoted verbatim in [`src/index.ts`](https://github.com/firecrawl/firecrawl-mcp-server/blob/main/src/index.ts)). Claude Code currently offers no configuration to suppress what an MCP server injects; related requests were closed *not planned*: [claude-code#43690](https://github.com/anthropics/claude-code/issues/43690) (suppressing built-in MCP tool injection) and [claude-code#30545](https://github.com/anthropics/claude-code/issues/30545) (MCP server instructions overriding CLAUDE.md rules). The script has no such instruction, costs no standing context, and stays scrape-only (1 credit).
+The Firecrawl MCP server injects an instruction that makes `firecrawl_search` the primary search tool, which overrides this cascade (quoted verbatim in [`src/index.ts`](https://github.com/firecrawl/firecrawl-mcp-server/blob/3eb1115b1f2883ff2fb74e61b5c4acf5a9ac0fb0/src/index.ts#L387), as of 2026-07). Claude Code currently offers no configuration to suppress what an MCP server injects; related requests were closed *not planned*: [claude-code#43690](https://github.com/anthropics/claude-code/issues/43690) (suppressing built-in MCP tool injection) and [claude-code#30545](https://github.com/anthropics/claude-code/issues/30545) (MCP server instructions overriding CLAUDE.md rules). The script has no such instruction, costs no standing context, and stays scrape-only (1 credit).
 
 ## Contributing
 
