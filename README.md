@@ -94,3 +94,9 @@ warranty disclaimer.
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+---
+
+Built and maintained by [David Belschak](https://belschak.dev). The story
+behind this skill: [Your agent gets a 403 and silently downgrades its
+sources](https://belschak.dev/blog/your-agent-gets-a-403.html).
