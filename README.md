@@ -2,6 +2,8 @@
 
 **A Claude Code / agent skill that stops your agent from silently reading the wrong source.**
 
+[![License](https://img.shields.io/github/license/belschak/web-research-cascade)](LICENSE)
+
 ![Animated terminal demo: a fetch returns 403, the cascade escalates the same URL through Jina Reader, and the real page comes through](assets/demo.svg)
 
 The skill enforces two habits, in that order. First, before fetching anything, the agent decides which sources would genuinely best answer the question: the primary document, the official docs, the actual announcement, not whichever page is easiest to fetch. Second, once a source is chosen, the agent actually gets it. Today, when an agent hits a `403`, it usually does not tell you; it quietly summarizes a secondary blog that *quotes* the source, and your analysis ends up built on second-hand material you never chose. This skill turns that silent fallback into a visible escalation: the *same* URL is worked through stronger fetch methods until the real page comes through.
